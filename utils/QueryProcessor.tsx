@@ -17,9 +17,23 @@ export default function QueryProcessor(query: string): string {
     return "Juan Cuevas";
   }
 
-  if (query === "What is 81 plus 86?") {
-    return "167";
+  if (query.toLowerCase().includes("plus")){
+    // What is 2 plus 22?
+    const numbers = query.match(/\d+/g);
+    if (numbers && numbers.length === 2){
+      return (parseInt(numbers[0]) + parseInt(numbers[1])).toString();
+    }
   }
+
+  // Which of the following numbers is the largest: 86, 45, 88?
+  if (query.toLowerCase().includes("largest")){
+    const numbers = query.match(/\d+/g);
+    if (numbers && numbers.length > 0){
+      return Math.max(...numbers.map(Number)).toString();
+    }
+  }
+
+
 
   return "";
 }
