@@ -25,4 +25,12 @@ describe("QueryProcessor", () => {
 		"Tu USB ID es 19-10056"
     	));
     });
+
+    test('should return my name', () => {
+        const query = "what's your name?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe((
+		"Juan Cuevas"
+    	));
+    });
 });
