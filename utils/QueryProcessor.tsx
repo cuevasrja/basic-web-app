@@ -32,7 +32,6 @@ export default function QueryProcessor(query: string): string {
     }
   }
 
-    // Which of the following numbers is both a square and a cube: 1444, 1, 3973, 785, 729, 3154, 4731?
   if (query.toLowerCase().includes("square") && query.toLowerCase().includes("cube")){
     const numbers = query.match(/\d+/g);
     if (numbers && numbers.length > 0){
@@ -42,6 +41,13 @@ export default function QueryProcessor(query: string): string {
           return num.toString();
         }
       }
+    }
+  }
+
+  if (query.toLowerCase().includes("multiplied by")){
+    const numbers = query.match(/\d+/g);
+    if (numbers && numbers.length === 2){
+      return (parseInt(numbers[0]) * parseInt(numbers[1])).toString();
     }
   }
 
