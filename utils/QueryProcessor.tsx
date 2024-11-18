@@ -32,15 +32,14 @@ export default function QueryProcessor(query: string): string {
     }
   }
 
-  // Which of the following numbers is both a square and a cube: 144, 2274, 2077, 4169, 3375, 64, 2473?
-  if (query.toLowerCase().includes("square") && query.toLowerCase().includes("cube")){
+  if (query.toLowerCase().includes("square") && query.toLowerCase().includes("cube")) {
     const numbers = query.match(/\d+/g);
-    if (numbers && numbers.length > 0){
-      for (let i = 0; i < numbers.length; i++){
+    if (numbers && numbers.length > 0) {
+      for (let i = 0; i < numbers.length; i++) {
         const num = parseInt(numbers[i]);
         const sqrt = Math.sqrt(num);
         const cbrt = Math.cbrt(num);
-        if (Math.floor(sqrt) === sqrt && Math.floor(cbrt) === cbrt){
+        if (Number.isInteger(sqrt) && Number.isInteger(cbrt)) {
           return num.toString();
         }
       }
@@ -51,6 +50,29 @@ export default function QueryProcessor(query: string): string {
     const numbers = query.match(/\d+/g);
     if (numbers && numbers.length === 2){
       return (parseInt(numbers[0]) * parseInt(numbers[1])).toString();
+    }
+  }
+
+  if (query.toLowerCase().includes("primes")){
+    const numbers = query.match(/\d+/g);
+    if (numbers && numbers.length > 0){
+      for (let i = 0; i < numbers.length; i++){
+        const num = parseInt(numbers[i]);
+        if (num < 2) continue;
+        let isPrime = true;
+        let j = 2;
+        while (j <= Math.sqrt(num)){
+          if (num % j === 0){
+            isPrime = false;
+            break;
+          }
+          j++;
+        }
+        if (isPrime){
+          return num.toString();
+        }
+      }
+      return ""
     }
   }
 
