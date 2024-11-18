@@ -32,12 +32,15 @@ export default function QueryProcessor(query: string): string {
     }
   }
 
+  // Which of the following numbers is both a square and a cube: 144, 2274, 2077, 4169, 3375, 64, 2473?
   if (query.toLowerCase().includes("square") && query.toLowerCase().includes("cube")){
     const numbers = query.match(/\d+/g);
     if (numbers && numbers.length > 0){
       for (let i = 0; i < numbers.length; i++){
         const num = parseInt(numbers[i]);
-        if (Math.sqrt(num) % 1 === 0 && Math.cbrt(num) % 1 === 0){
+        const sqrt = Math.sqrt(num);
+        const cbrt = Math.cbrt(num);
+        if (Math.floor(sqrt) === sqrt && Math.floor(cbrt) === cbrt){
           return num.toString();
         }
       }
