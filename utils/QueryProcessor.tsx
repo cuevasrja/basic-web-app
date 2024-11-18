@@ -25,7 +25,6 @@ export default function QueryProcessor(query: string): string {
     }
   }
 
-  // Which of the following numbers is the largest: 86, 45, 88?
   if (query.toLowerCase().includes("largest")){
     const numbers = query.match(/\d+/g);
     if (numbers && numbers.length > 0){
@@ -33,6 +32,18 @@ export default function QueryProcessor(query: string): string {
     }
   }
 
+    // Which of the following numbers is both a square and a cube: 1444, 1, 3973, 785, 729, 3154, 4731?
+  if (query.toLowerCase().includes("square") && query.toLowerCase().includes("cube")){
+    const numbers = query.match(/\d+/g);
+    if (numbers && numbers.length > 0){
+      for (let i = 0; i < numbers.length; i++){
+        const num = parseInt(numbers[i]);
+        if (Math.sqrt(num) % 1 === 0 && Math.cbrt(num) % 1 === 0){
+          return num.toString();
+        }
+      }
+    }
+  }
 
 
   return "";
